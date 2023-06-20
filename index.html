@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>강화</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <h1>칼을 강화 하세요!</h1>
+        <h2 id="pal">기본무기</h2>
+        <h3 id="randomper">100%</h3>
+        <img src="https://tse1.mm.bing.net/th?id=OIP.kH_hwIP1VuRSiWGETfRZLAHaHa&pid=Api&P=0&h=180">
+        <div>
+            <script>
+                function random(Arr) {
+                    if (Arr.length === 1) return Arr[0].value
+                    if (Arr.findIndex((e) => e.per === 100) !== -1) return Arr.find((e) => e.per === 0)
+                    if (Arr.length === 0 || Arr.reduce((pre, curr) => curr.per + pre, 0) > 100) return null
+                    const trl = n => n.toString().replace('.', '').length
+                    const sum = i => Arr.reduce((pre, curr, I) => (I > i ? pre : pre + curr.per), 0)
+                    const max = Number(`1${'0'.repeat(trl(Arr.sort((a, b) => trl(b.per) - trl(a.per))[0].per))}`)
+                    const ran = ((Math.random() * max) | 0) + 1
+                    const asdf = n => n.toString().includes('.') ? Number(n.toString().replace('.', '')) : Number(n.toString() + '0'.repeat(max.toString().slice(3).length))
+                    let index = -1
+                    for (const [i, e] of Arr.entries()) {
+                        const pre = asdf(sum(i - 1))
+                        if ((i === 0 && e.per <= ran) || (i === Arr.length - 1 && pre <= ran) || (pre <= ran && asdf(sum(i)) > ran)) index = i
+                    }
+                    return Arr[index].value
+                }
+                function upgrade() {
+                    const t = document.getElementById("pal").innerText;
+                    const r = document.getElementById("randomper").innerText;
+                    console.log(r);
+                    if (t == "기본무기") {
+                        document.getElementById("pal").innerHTML = `+1강`;
+                    } else {
+                        let h = Number(r.slice(0, r.length-1));
+                        console.log(h);
+                        if (h <= 100 && h > 40) {
+                            var c = h-5
+                        } else if (h <= 40 && h > 20) {
+                            var c = h-4
+                        } else if (h <= 20 && h > 5) {
+                            var c = h-3
+                        } else if (h <= 5 && h > 1) {
+                            var c = h-0.2
+                        } else if (h <= 1) {
+                            var c = h-0.02
+                        }
+                        var b = Number(100-c);
+                        const rk = random([{
+                            value: '성공',
+                            per: c
+                        },
+                        {
+                            value: '실패',
+                            per: b
+                        }]);
+                        if (rk == '성공') {
+                            var a = Number(t.slice(1, t.length-1)+1);
+                            document.getElementById("randomper").innerHTML = `${c}%`;
+                            document.getElementById("pal").innerHTML = `+1강`;
+                        } else if (rk == '실패') {
+                            let h = Number(r.slice(0, r.length-1));
+                            console.log(h);
+                            if (h <= 100 && h > 40) {
+                                var c = c+5
+                            } else if (h <= 40 && h > 20) {
+                                var c = c+4
+                            } else if (h <= 20 && h > 5) {
+                                var c = c+3
+                            } else if (h <= 5 && h > 1) {
+                                var c = c+0.2
+                            } else if (h <= 1) {
+                                var c = c+0.02
+                            }
+                            var a = Number(t.slice(1, t.length-1)-1);
+                            if (a < 1) {
+                                a = "기본무기"
+                                document.getElementById("pal").innerHTML = `${a}`;
+                                document.getElementById("randomper").innerHTML = `100%`;
+                            } else {
+                                document.getElementById("randomper").innerHTML = `${c}%`;
+                                document.getElementById("pal").innerHTML = `${a}강`;
+                            }
+                        }
+                    }
+                }
+                function reset() {
+                    document.getElementById("pal").innerHTML = '기본무기';
+                }
+            </script>
+            <button class="btn1" onclick="upgrade()">강화</button>
+        </div>
+        <h1></h1>
+        <button class="btn2" onclick="reset()">재설정</button>
+    </body>
+</html>

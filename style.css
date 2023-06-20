@@ -1,0 +1,33 @@
+.btn1{
+    width: 180px;
+    height: 100px;
+    font-size: 60px;
+    font-weight: bolder;
+    background-color: rgb(59, 121, 255);
+    color:white;
+    box-shadow: 0 4px 8px rgb(0, 70, 221);
+    border-radius: 20px;
+    position: relative;
+}
+
+button:focus{
+    outline: 0;
+}
+
+button:hover{
+    background-color: rgb(130, 163, 235);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgb(76, 67, 199);
+}
+
+.btn2{
+    width: 180px;
+    height: 65px;
+    font-size: 40px;
+    font-weight: bolder;
+    background-color: rgb(59, 121, 255);
+    color:white;
+    box-shadow: 0 4px 8px rgb(0, 70, 221);
+    border-radius: 20px;
+    position: relative;
+}
