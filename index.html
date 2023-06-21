@@ -64,15 +64,15 @@
                         } else if (rk == '실패') {
                             let h = Number(r.slice(0, r.length-1));
                             if (h <= 100 && h > 40) {
-                                var l = c+5
+                                var l = c+10
                             } else if (h <= 40 && h > 20) {
-                                var l = c+4
+                                var l = c+8
                             } else if (h <= 20 && h > 5) {
-                                var l = c+3
+                                var l = c+6
                             } else if (h <= 5 && h > 1) {
-                                var l = c+0.2
+                                var l = c+0.4
                             } else if (h <= 1) {
-                                var l = c+0.02
+                                var l = c+0.04
                             }
                             var a = Number(t.slice(1, t.length-1))-1;
                             if (a < 1) {
