@@ -72,7 +72,7 @@
                                 let a = Number(t.slice(9, t.length-1))+1;
                                 let i = Number(n.slice(8, n.length));
                                 console.log(a);
-                                if (i <= 11) {
+                                if (i <= 11 && i > 0) {
                                     let u = i+1
                                     document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
                                     document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
