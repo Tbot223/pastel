@@ -11,7 +11,7 @@
         <h2 id="nagudo">칼 내구도 : 10</h2>
         <h2 id="pal">강화 레벨 : 기본무기</h2>
         <h3 id="randomper">강화 확률 : 100%</h3>
-        <img src="https://tse1.mm.bing.net/th?id=OIP.kH_hwIP1VuRSiWGETfRZLAHaHa&pid=Api&P=0&h=180">
+        <img id="img1" src="https://tse1.mm.bing.net/th?id=OIP.kH_hwIP1VuRSiWGETfRZLAHaHa&pid=Api&P=0&h=180">
         <div>
             <script>
                 function random(Arr) {
@@ -36,78 +36,102 @@
                     const n = document.getElementById("nagudo").innerText;
                     console.log(r);
                     console.log(t);
-                    if (t == "강화 레벨 : 기본무기") {
-                        document.getElementById("pal").innerHTML = "강화 레벨 : +1강";
-                        document.getElementById("randomper").innerHTML = `강화 확률 : 99%`;
-                        document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
-                    } else {
-                        let h = Number(r.slice(8, r.length-1));
-                        console.log(h);
-                        if (h <= 100 && h > 40) {
-                            var c = h-5
-                        } else if (h <= 40 && h > 20) {
-                            var c = h-4
-                        } else if (h <= 20 && h > 5) {
-                            var c = h-3
-                        } else if (h <= 5 && h > 1) {
-                            var c = h-0.2
-                        } else if (h <= 1) {
-                            var c = h-0.02
-                        }
-                        var b = Number(100-c);
-                        console.log(c);
-                        console.log(b);
-                        const rk = random([{
-                            value: '성공',
-                            per: c
-                        },
-                        {
-                            value: '실패',
-                            per: b
-                        }]);
-                        console.log(rk);
-                        if (rk == '성공') {
-                            let a = Number(t.slice(9, t.length-1))+1;
-                            console.log(a);
-                            document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
-                            document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                    var i = Number(n.slice(8, n.length-1))+1;
+                    if (i >= 1) {
+                        if (t == "강화 레벨 : 기본무기") {
+                            document.getElementById("pal").innerHTML = "강화 레벨 : +1강";
+                            document.getElementById("randomper").innerHTML = `강화 확률 : 99%`;
                             document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
-                        } else if (rk == '실패') {
+                        } else {
                             let h = Number(r.slice(8, r.length-1));
-                            let a = Number(t.slice(9, t.length-1))-1;
-                            let i = Number()
-                            console.log(a);
+                            console.log(h);
                             if (h <= 100 && h > 40) {
-                                var l = c+10
+                                var c = h-5
                             } else if (h <= 40 && h > 20) {
-                                var l = c+8
+                                var c = h-4
                             } else if (h <= 20 && h > 5) {
-                                var l = c+6
+                                var c = h-3
                             } else if (h <= 5 && h > 1) {
-                                var l = c+0.4
+                                var c = h-0.2
                             } else if (h <= 1) {
-                                var l = c+0.04
+                                var c = h-0.02
                             }
-                            console.log(l);
-                            if (a < 1) {
-                                document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
-                                document.getElementById("randomper").innerHTML = `강화 확률 : 100%`;
-                                document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
-                            } else {
-                                document.getElementById("randomper").innerHTML = `강화 확률 : ${l}%`;
-                                document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
-                                document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
+                            var b = Number(100-c);
+                            console.log(c);
+                            console.log(b);
+                            const rk = random([{
+                                value: '성공',
+                                per: c
+                            },
+                            {
+                                value: '실패',
+                                per: b
+                            }]);
+                            console.log(rk);
+                            if (rk == '성공') {
+                                let a = Number(t.slice(9, t.length-1))+1;
+                                let i = Number(n.slice(8, n.length));
+                                console.log(a);
+                                if (i <= 11) {
+                                    let u = i+1
+                                    document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
+                                    document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                                    document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
+                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${u}`;
+                                } else {
+                                    document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
+                                    document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                                    document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
+                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                                }
+                            } else if (rk == '실패') {
+                                let h = Number(r.slice(8, r.length-1));
+                                let a = Number(t.slice(9, t.length-1))-1;
+                                let i = Number(n.slice(8, n.length))-1;
+                                console.log(i);
+                                console.log(h);
+                                if (h <= 100 && h > 40) {
+                                    var l = c+10
+                                } else if (h <= 40 && h > 20) {
+                                    var l = c+8
+                                } else if (h <= 20 && h > 5) {
+                                    var l = c+6
+                                } else if (h <= 5 && h > 1) {
+                                    var l = c+0.4
+                                } else if (h <= 1) {
+                                    var l = c+0.04
+                                }
+                                console.log(l);
+                                if (a < 1) {
+                                    document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
+                                    document.getElementById("randomper").innerHTML = `강화 확률 : 100%`;
+                                    document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
+                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                                } else {
+                                    document.getElementById("randomper").innerHTML = `강화 확률 : ${l}%`;
+                                    document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                                    document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
+                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                                }
                             }
                         }
+                    } else {
+                        document.getElementById("randomper").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
+                        document.getElementById("pal").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
+                        document.getElementById("f or t").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
+                        document.getElementById("nagudo").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
                     }
                 }
                 function reset() {
-                    document.getElementById("pal").innerHTML = '기본무기';
+                    document.getElementById("randomper").innerHTML = "강화 확률 : 100%";
+                    document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
+                    document.getElementById("f or t").innerHTML = "성공 여부 : unkown";
+                    document.getElementById("nagudo").innerHTML = "칼 내구도 : 10";
                 }
             </script>
             <button class="btn1" onclick="upgrade()">강화</button>
         </div>
         <h1></h1>
-        <button class="btn2" onclick="reset()">재설정</button>
+        <button class="btn2" onclick="reset()">초기화</button>
     </body>
 </html>
