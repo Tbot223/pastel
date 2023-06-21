@@ -64,15 +64,15 @@
                         } else if (rk == '실패') {
                             let h = Number(r.slice(0, r.length-1));
                             if (h <= 100 && h > 40) {
-                                var c = c+5
+                                var l = c+5
                             } else if (h <= 40 && h > 20) {
-                                var c = c+4
+                                var l = c+4
                             } else if (h <= 20 && h > 5) {
-                                var c = c+3
+                                var l = c+3
                             } else if (h <= 5 && h > 1) {
-                                var c = c+0.2
+                                var l = c+0.2
                             } else if (h <= 1) {
-                                var c = c+0.02
+                                var l = c+0.02
                             }
                             var a = Number(t.slice(1, t.length-1))-1;
                             if (a < 1) {
@@ -80,7 +80,7 @@
                                 document.getElementById("pal").innerHTML = `${a}`;
                                 document.getElementById("randomper").innerHTML = `100%`;
                             } else {
-                                document.getElementById("randomper").innerHTML = `${c}%`;
+                                document.getElementById("randomper").innerHTML = `${l}%`;
                                 document.getElementById("pal").innerHTML = `+${a}강`;
                             }
                         }
