@@ -11,8 +11,9 @@
         <h2 id="nagudo">칼 내구도 : 10</h2>
         <h2 id="pal">강화 레벨 : 기본무기</h2>
         <h3 id="randomper">강화 확률 : 100%</h3>
+        <h3 id="money">돈 : 18gold</h3>
+        <h3 id="price">가격 : 0gold</h3>
         <img id="img1" src="https://tse1.mm.bing.net/th?id=OIP.kH_hwIP1VuRSiWGETfRZLAHaHa&pid=Api&P=0&h=180">
-        <div>
             <script>
                 function random(Arr) {
                     if (Arr.length === 1) return Arr[0].value
@@ -34,6 +35,8 @@
                     const t = document.getElementById("pal").innerText;
                     const r = document.getElementById("randomper").innerText;
                     const n = document.getElementById("nagudo").innerText;
+                    const money = document.getElementById("money").innerText;
+                    const price = document.getElementById("price").innerText;
                     console.log(r);
                     console.log(t);
                     var i = Number(n.slice(8, n.length));
@@ -68,51 +71,72 @@
                                 per: b
                             }]);
                             console.log(rk);
-                            if (rk == '성공') {
-                                let a = Number(t.slice(9, t.length-1))+1;
-                                let i = Number(n.slice(8, n.length));
-                                console.log(a);
-                                if (i <= 11) {
-                                    let u = i+1
-                                    document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
-                                    document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
-                                    document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
-                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${u}`;
-                                } else {
-                                    document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
-                                    document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
-                                    document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
-                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                            var ia = Number(money.slice(4, money.length-4));
+                            if (ia > 0) {
+                                if (rk == '성공') {
+                                    let a = Number(t.slice(9, t.length-1))+1;
+                                    let i = Number(n.slice(8, n.length));
+                                    let ib = Number(price.slice(5, price.length-4));
+                                    console.log(a);
+                                    if (i <= 11) {
+                                        let u = i+1
+                                        document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
+                                        document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                                        document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
+                                        document.getElementById("nagudo").innerHTML = `칼 내구도 : ${u}`;
+                                        document.getElementById("money").innerHTML = `돈 : ${ia-1}gold`;
+                                        document.getElementById("price").innerHTML = `가격 : ${ib+2}gold`;
+                                    } else {
+                                        document.getElementById("randomper").innerHTML = `강화 확률 : ${c}%`;
+                                        document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                                        document.getElementById("f or t").innerHTML = `성공 여부 : 성공`;
+                                        document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                                        document.getElementById("money").innerHTML = `돈 : ${ia-1}gold`;
+                                        document.getElementById("price").innerHTML = `가격 : ${ib+2}gold`;
+                                    }
+                                } else if (rk == '실패') {
+                                    let h = Number(r.slice(8, r.length-1));
+                                    let a = Number(t.slice(9, t.length-1))-1;
+                                    let i = Number(n.slice(8, n.length))-1;
+                                    let ia = Number(money.slice(4, money.length-4));
+                                    let ib = Number(price.slice(5, price.length-4));
+                                    console.log(i);
+                                    console.log(h);
+                                    if (h <= 100 && h > 40) {
+                                        var l = c+10
+                                    } else if (h <= 40 && h > 20) {
+                                        var l = c+8
+                                    } else if (h <= 20 && h > 5) {
+                                        var l = c+6
+                                    } else if (h <= 5 && h > 1) {
+                                        var l = c+0.4
+                                    } else if (h <= 1) {
+                                        var l = c+0.04
+                                    }
+                                    console.log(l);
+                                    if (a < 1) {
+                                        document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
+                                        document.getElementById("randomper").innerHTML = `강화 확률 : 100%`;
+                                        document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
+                                        document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                                        document.getElementById("money").innerHTML = `돈 : ${ia-1}gold`;
+                                        document.getElementById("price").innerHTML = `가격 : 0gold`;
+                                    } else {
+                                        document.getElementById("randomper").innerHTML = `강화 확률 : ${l}%`;
+                                        document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
+                                        document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
+                                        document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
+                                        document.getElementById("money").innerHTML = `돈 : ${ia-1}gold`;
+                                        document.getElementById("price").innerHTML = `가격 : ${ib-2}gold`;
+                                    }
                                 }
-                            } else if (rk == '실패') {
-                                let h = Number(r.slice(8, r.length-1));
-                                let a = Number(t.slice(9, t.length-1))-1;
-                                let i = Number(n.slice(8, n.length))-1;
-                                console.log(i);
-                                console.log(h);
-                                if (h <= 100 && h > 40) {
-                                    var l = c+10
-                                } else if (h <= 40 && h > 20) {
-                                    var l = c+8
-                                } else if (h <= 20 && h > 5) {
-                                    var l = c+6
-                                } else if (h <= 5 && h > 1) {
-                                    var l = c+0.4
-                                } else if (h <= 1) {
-                                    var l = c+0.04
-                                }
-                                console.log(l);
-                                if (a < 1) {
-                                    document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
-                                    document.getElementById("randomper").innerHTML = `강화 확률 : 100%`;
-                                    document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
-                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
-                                } else {
-                                    document.getElementById("randomper").innerHTML = `강화 확률 : ${l}%`;
-                                    document.getElementById("pal").innerHTML = `강화 레벨 : +${a}강`;
-                                    document.getElementById("f or t").innerHTML = `성공 여부 : 실패`;
-                                    document.getElementById("nagudo").innerHTML = `칼 내구도 : ${i}`;
-                                }
+                            } else {
+                                document.getElementById("randomper").innerHTML = "파산하였습니다. 초기화 버튼을 누르세요";
+                                document.getElementById("pal").innerHTML = "파산하였습니다. 초기화 버튼을 누르세요";
+                                document.getElementById("f or t").innerHTML = "파산하였습니다. 초기화 버튼을 누르세요";
+                                document.getElementById("nagudo").innerHTML = "파산하였습니다. 초기화 버튼을 누르세요";
+                                document.getElementById("money").innerHTML = "파산하였습니다. 초기화 버튼을 누르세요";
+                                document.getElementById("price").innerHTML = "파산하였습니다. 초기화 버튼을 누르세요";
                             }
                         }
                     } else {
@@ -120,6 +144,8 @@
                         document.getElementById("pal").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
                         document.getElementById("f or t").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
                         document.getElementById("nagudo").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
+                        document.getElementById("money").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
+                        document.getElementById("price").innerHTML = "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.";
                     }
                 }
                 function reset() {
@@ -127,11 +153,37 @@
                     document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
                     document.getElementById("f or t").innerHTML = "성공 여부 : unkown";
                     document.getElementById("nagudo").innerHTML = "칼 내구도 : 10";
+                    document.getElementById("money").innerHTML = `돈 : 18gold`;
+                    document.getElementById("price").innerHTML = `가격 : 0gold`;
+                }
+                function sell(){
+                    const t = document.getElementById("pal").innerText;
+                    const price = document.getElementById("price").innerText;
+                    const money = document.getElementById("money").innerText;
+                    if (t !== "칼이 파괴되었습니다. 초기화 버튼을 눌러 다시 강화해주세요.") {
+                        let ia = Number(money.slice(4, money.length-4));
+                        let ib = Number(price.slice(5, price.length-4));
+                        document.getElementById("randomper").innerHTML = "강화 확률 : 100%";
+                        document.getElementById("pal").innerHTML = "강화 레벨 : 기본무기";
+                        document.getElementById("f or t").innerHTML = "성공 여부 : unkown";
+                        document.getElementById("nagudo").innerHTML = "칼 내구도 : 10";
+                        document.getElementById("money").innerHTML = `돈 : ${ia+ib}gold`;
+                        document.getElementById("price").innerHTML = `가격 : 0gold`;
+                    } else {
+                        document.getElementById("randomper").innerHTML = "초기화 버튼을 눌러 주세요.";
+                        document.getElementById("pal").innerHTML = "초기화 버튼을 눌러 주세요.";
+                        document.getElementById("f or t").innerHTML = "초기화 버튼을 눌러 주세요.";
+                        document.getElementById("nagudo").innerHTML = "초기화 버튼을 눌러 주세요.";
+                        document.getElementById("money").innerHTML = "초기화 버튼을 눌러 주세요.";
+                        document.getElementById("price").innerHTML = "초기화 버튼을 눌러 주세요.";
+                    }
+
                 }
             </script>
             <button class="btn1" onclick="upgrade()">강화</button>
-        </div>
-        <h1></h1>
-        <button class="btn2" onclick="reset()">초기화</button>
+            <h1></h1>
+            <button class="btn2" onclick="sell()">판매</button>
+            <h1></h1>
+            <button class="btn2" onclick="reset()">초기화</button>
     </body>
 </html>
